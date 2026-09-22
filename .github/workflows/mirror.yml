@@ -1,0 +1,44 @@
+name: Mirror
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
+    steps:
+      - name: Install Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 26.8
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Run
+        run: npm run start
+        env:
+          BAR_LIST_KEY: ${{ secrets.BAR_LIST_KEY }}
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./out
+
+      - name: Deploy artifact
+        id: deployment
+        uses: actions/deploy-pages@v5

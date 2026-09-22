@@ -1,0 +1,19 @@
+{
+  "name": "menus-mirror",
+  "version": "1.0.0",
+  "description": "mirrors glossy's menus to a local copy",
+  "repository": {
+    "type": "git",
+    "url": "https://git.abyssalfragments.org/services/menus-mirror"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Lillith Rose",
+    "email": "lillithrose@abyssalfragments.orgl"
+  },
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  }
+}
