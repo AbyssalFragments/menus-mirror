@@ -40,6 +40,10 @@ async function downloadBarMenu(slug, type) {
   const bars = await fixedFetch("/bars").then((i) => i.json());
   console.log(`Found ${Object.keys(bars).length} bars`);
 
+  await downloadBarMenu("public", "bartender");
+  await downloadBarMenu("public", "visitor");
+  await downloadBarMenu("public", "nokarm");
+
   for (const [slug, data] of Object.entries(bars)) {
     await mkdir(join(OUT_DIR, slug), { recursive: true });
     await Promise.all(
